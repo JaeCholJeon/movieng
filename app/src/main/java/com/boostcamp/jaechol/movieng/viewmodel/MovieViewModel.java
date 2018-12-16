@@ -23,23 +23,19 @@ import com.boostcamp.jaechol.movieng.utils.ProgressDialog;
 
 
 /**
- * Created by jaechol on 2018. 12. 15..
+ * MovieModelView  메인 ModelView
  */
 
 public class MovieViewModel implements BaseViewModel {
 
+    public ObservableArrayList<MovieModel> movieList;
+    public ObservableField<String> movieTitle;
     private Context context;
     private ApiService service_Movie;
     private boolean isServiceBind = false;
-    public ObservableArrayList<MovieModel> movieList;
-    public ObservableField<String> movieTitle;
-    private RecyclerView recyclerViewList;
-    private String stringMovieTitle;
-    private LinearLayoutManager layoutManager;
-    private RecyclerDataAdapter recyclerDataAdapter;
-    private IndexData indexData;
-    private ProgressDialog searchingDialog;
-
+    /**
+     * Api 서비스 바인딩
+     */
     ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -54,12 +50,32 @@ public class MovieViewModel implements BaseViewModel {
             isServiceBind = false;
         }
     };
+    private RecyclerView recyclerViewList;
+    private String stringMovieTitle;
+    private LinearLayoutManager layoutManager;
+    private RecyclerDataAdapter recyclerDataAdapter;
+    private IndexData indexData;
+    private ProgressDialog searchingDialog;
 
 
     public MovieViewModel(Context context, RecyclerView recyclerView) {
         this.context = context;
         this.recyclerViewList = recyclerView;
     }
+
+    @BindingAdapter("bind:item")
+    public static void bindItem(RecyclerView recyclerView,
+                                ObservableArrayList<MovieModel> movie) {
+        RecyclerDataAdapter adapter = (RecyclerDataAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.setItem(movie);
+        }
+    }
+
+    /***
+     *
+     * 검색 버튼 클릭시 네트워크 체크
+     */
 
     private Boolean isNetworkAvail() {
         ConnectivityManager networkManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -128,29 +144,22 @@ public class MovieViewModel implements BaseViewModel {
             context.bindService(intentApiService, conn, Context.BIND_AUTO_CREATE);
         }
     }
-
     @Override
-    public void onDestroy() {}
+    public void onDestroy() {
+    }
 
     @Override
     public void onTextAfterChanged(Editable editable) {
         stringMovieTitle = editable.toString();
     }
 
-
-    @BindingAdapter("bind:item")
-    public static void bindItem(RecyclerView recyclerView,
-                                ObservableArrayList<MovieModel> movie) {
-        RecyclerDataAdapter adapter = (RecyclerDataAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
-            adapter.setItem(movie);
-        }
-    }
-
+    /***
+     *
+     * 클릭 이벤트 처리
+     */
     public void onClickBtnSearch(View v) {
         if (!isNetworkAvail()) {
             Toast.makeText(context, R.string.fail_connect_newtwork, Toast.LENGTH_SHORT).show();
-
             return;
         }
         indexData.set(0, 0);
