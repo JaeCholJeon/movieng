@@ -153,7 +153,6 @@ public class MovieViewModel implements BaseViewModel {
 
             return;
         }
-        Toast.makeText(context, stringMovieTitle, Toast.LENGTH_SHORT).show();
         indexData.set(0, 0);
         movieList.clear();
         if (stringMovieTitle.equals("")) {
