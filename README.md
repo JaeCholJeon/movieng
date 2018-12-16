@@ -22,7 +22,7 @@
   "errorMessage": "Invalid start value (부적절한 start 값입니다.)",<br>
   "errorCode": "SE03"<br>
   }<br>
- -4. 빈 검색어 , 빈 검색 결과 처리<br><br>
+ -4. 빈 검색어 , 빈 검색 결과 처리<br>
  -5. 데이터바인딩 사용<br>
  -6. MVVM 패턴 적용
  # 결과영상<br>
