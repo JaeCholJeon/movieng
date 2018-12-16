@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <import type="android.databinding.ObservableArrayList" />
+        <import type="com.boostcamp.jaechol.movieng.model.MovieModel"/>
+        <variable
+            name="movieList"
+            type="ObservableArrayList&lt;MovieModel&gt;" />
+        <variable
+            name="modelView"
+            type="com.boostcamp.jaechol.movieng.viewmodel.MovieViewModel"/>
+
+        <variable
+            name="MainActivity"
+            type="com.boostcamp.jaechol.movieng.view.MainActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/editText_movie_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:hint="영화 타이틀"
+                android:afterTextChanged="@{modelView::onTextAfterChanged}"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/button_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:onClick="@{modelView::onClickBtnSearch}"
+                android:text="검색" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            bind:item="@{modelView.movieList}"
+            />
+    </LinearLayout>
+</layout>

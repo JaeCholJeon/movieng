@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <data>
+
+        <variable
+            name="MovieItem"
+            type="com.boostcamp.jaechol.movieng.model.MovieModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/recycler_viewhoder_imageview_movie"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            app:imageUrl= "@{MovieItem.imageUrl}"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/recycler_viewhoder_textview_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{MovieItem.title}"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/recycler_viewhoder_ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                android:stepSize="0.1"
+                android:rating="@{MovieItem.userRating}"/>
+
+            <TextView
+                android:id="@+id/recycler_viewhoder_textview_etc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{MovieItem.getEtc}"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

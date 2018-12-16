@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">부스트캠프 사전과제</string>
+    <string name="no_result">검색 결과가 업습니다</string>
+    <string name="fail_start_service">어플리케이션을 다시 시작해주세요.</string>
+    <string name="no_input_data">검색어를 입력해주세요.</string>
+    <string name="fail_connect_newtwork">네트워크에 연결되지 않았습니다.</string>
+</resources>
